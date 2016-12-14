@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/carrat/nytreact/issues"
   },
-  "homepage": "https://github.com/carrat/nytreact#readme"
+  "homepage": "https://github.com/carrat/nytreact#readme",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.2",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-router": "^3.0.0",
+    "request": "^2.79.0"
+  }
 }
