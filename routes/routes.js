@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require('express'),
-    controller = require('../controllers/application_controller'),
+    controller = require('../controllers/application_controller.js'),
     router = express.Router();
 
 router.get('/', controller.home);
