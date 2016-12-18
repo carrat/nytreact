@@ -28,11 +28,7 @@ class Saved extends React.Component {
 
   render() {
 
-    return (
-
-      
-      
-    );
+    return 
   }
 }
 

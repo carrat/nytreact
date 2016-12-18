@@ -10,8 +10,9 @@ var IndexRoute	= Router.IndexRoute;
 
 // Reference the high-level components
 var Main = require('../components/Main');
-var Search = require('../components/Search'); 
-var Saved = require('../components/Saved'); 
+var Form = require('../components/children/Form'); 
+var Results = require('../components/children/Results'); 
+var Saved = require('../components/children/Saved'); 
 
 
 // Export the Routes

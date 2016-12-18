@@ -67,9 +67,9 @@ class Form extends React.Component {
                   value={this.state.numRecords}
                   onChange={this.handleChange}
                   required>
-                    <option value=1>1</option>
-                    <option value=5>5</option>
-                    <option value=10 selected>10</option>
+                    <option value="1">1</option>
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
                   </select>       
                 </div>
 

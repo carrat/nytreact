@@ -29,13 +29,13 @@ class Main extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
 
-    if (prevState.searchTerm !== this.state.searchTerm) ||
+    if ((prevState.searchTerm !== this.state.searchTerm) ||
        (prevState.startYear !== this.state.startYear) ||
-       (prevState.endYear !== this.state.endYear)) || 
-       (prevState.numRecords !== this.state.numRecords)) || {
+       (prevState.endYear !== this.state.endYear) || 
+       (prevState.numRecords !== this.state.numRecords)) {
        console.log("UPDATED");
 
-      helpers.searchArticles(this.state.searchTerm), this.state.startYear, this.state.endYear, this.state.numRecords).then((data) => {
+      helpers.searchArticles(this.state.searchTerm, this.state.startYear, this.state.endYear, this.state.numRecords).then((data) => {
         if (data !== this.state.results) {
           console.log(data);
 
