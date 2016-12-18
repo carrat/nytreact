@@ -1,48 +1,78 @@
-// Include React 
-var React = require('react');
+import React from "react";
 
-// Included all of the React Router dependencies
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
+// Import sub-components
+import Form from "./children/Form";
+import Results from "./children/Results";
 
-var Main = React.createClass({
+// Helper Function
+import helpers from "./utils/helpers";
 
-	// Here we render the component
-	render: function(){
+class Main extends React.Component {
 
-		return(
+  constructor(props) {
 
-			<div className="container">
+    super(props);
 
-				<div className="row">
+    this.state = {
+      searchTerm: "",
+      results: ""
+    };
 
-					<div className="jumbotron">
-						<h1>React Router</h1>
-						<p><em>Because we can't afford to miss a minute of this video! #flylikeaneagle</em></p>
-						<a href="#/info"><button className="btn btn-default">Info</button></a>
-						<a href="#/chat"><button className="btn btn-default">Comments</button></a>
-					</div>
+    this.setTerm = this.setTerm.bind(this);
+  }
 
-					<div className="row">
-						<div className="text-center">
-							<iframe width="640" height="360" src="https://www.youtube.com/embed/K1lKk5IU4ZE?rel=0&amp;controls=0&amp;showinfo=0" ></iframe>
-						</div>
-					</div>
+  componentDidUpdate(prevProps, prevState) {
 
-					<div className="container">
+    if (prevState.searchTerm !== this.state.searchTerm) {
+      console.log("UPDATED");
 
-						{/*Added this.props.children to dump all of the child components into place*/}
-						{this.props.children}
+      helpers.runQuery(this.state.searchTerm).then((data) => {
+        if (data !== this.state.results) {
+          console.log(data);
 
-					</div>
-				</div>
+          this.setState({ results: data });
+        }
+      });
+    }
+  }
 
-			</div>
-		)
-	}
-});
+  setTerm(term) {
+    this.setState({
+      searchTerm: term
+    });
+  }
 
-// Export the component back for use in other files
-module.exports = Main;
+  render() {
+
+    return (
+
+      <div className="container">
+        <div className="row">
+          <div className="jumbotron">
+            <h2 className="text-center">Address Finder!</h2>
+            <p className="text-center">
+              <em>Enter a landmark to search for its exact address (ex: "Eiffel Tower").</em>
+            </p>
+          </div>
+
+          <div className="col-md-6">
+
+            <Form setTerm={this.setTerm} />
+
+          </div>
+
+          <div className="col-md-6">
+
+            <Results address={this.state.results} />
+
+          </div>
+
+        </div>
+
+      </div>
+    );
+  }
+}
+
+// Export the componen back for use in other files
+export default Main;
