@@ -9,7 +9,6 @@ var Article = require("../models/Article.js");
 // define routes
 router.get('/', function (req, res) {
 
-	home: (req, res) => {  
       res.send('index.html');
   }
 	
