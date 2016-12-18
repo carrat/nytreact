@@ -4,17 +4,17 @@ const express = require('express'),
     controller = require('../controllers/application_controller.js'),
     router = express.Router();
 
-router.get('/', controller.home);
+router.get('/', router.home);
 
 
 //Get previously saved articles
-router.get('/api/saved', controller.searchArticles);
+router.get('/api/saved', router.searchArticles);
 
 //Save an article
-router.post('/api/saved', controller.saveArticle);
+router.post('/api/saved', router.saveArticle);
 
 //Delete an article
-router.delete('/api/saved', controller.deleteArticle);
+router.delete('/api/saved', router.deleteArticle);
 
 
 module.exports = router;
