@@ -5,7 +5,10 @@ class Form extends React.Component {
     super(props);
 
     this.state = {
-      term: ""
+      searchTerm: "",
+      numRecords: 10,
+      startYear: "",
+      endYear: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,51 +24,83 @@ class Form extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log("CLICK");
-    console.log(this.state.term);
-    this.props.setTerm(this.state.term);
-    this.setState({ term: "" });
+    this.props.setTerm(this.state);
+    this.setState({ searchTerm: "" });
+    this.setState({ numRecords: "" });
+    this.setState({ startYear: "" });
+    this.setState({ endYear: "" });
   }
 
   render() {
 
     return (
 
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          <h3 className="panel-title text-center">Query</h3>
-        </div>
-        <div className="panel-body text-center">
+      <div className="row">
+        <div className="col-sm-12">
 
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <h4 className="">
-                <strong>Location</strong>
-              </h4>
-
-              {/*
-                Note how each of the form elements has an id that matches the state.
-                This is not necessary but it is convenient.
-                Also note how each has an onChange event associated with our handleChange event.
-              */}
-              <input
-                type="text"
-                className="form-control text-center"
-                id="term"
-                value={this.state.term}
-                onChange={this.handleChange}
-                required
-              />
-              <br />
-
-              <button
-                type="submit"
-                className="btn btn-primary"
-              >
-                Submit
-              </button>
-
+          <div className="panel panel-primary">
+            <div className="panel-heading">
+              <h3 className="panel-title"><strong>Search Parameters</strong></h3>
             </div>
-          </form>
+            
+            <div className="panel-body">
+
+              <form onSubmit={this.handleSubmit}>
+
+                <div className="form-group">
+                  <label for="searchTerm">Search Term:</label>
+                  <input
+                    type="text"
+                    className="form-control text-center"
+                    id="searchTerm"
+                    value={this.state.searchTerm}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label for="numRecords">Number of Records to Retrieve:</label>
+                  <select 
+                  className="form-control" 
+                  id="numRecords" 
+                  value={this.state.numRecords}
+                  onChange={this.handleChange}
+                  required>
+                    <option value=1>1</option>
+                    <option value=5>5</option>
+                    <option value=10 selected>10</option>
+                  </select>       
+                </div>
+
+                <div className="form-group">
+                  <label for="startYear">Start Year (Optional):</label>
+                  <input
+                    type="text"
+                    className="form-control text-center"
+                    id="startYear"
+                    value={this.state.startYear}
+                    onChange={this.handleChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label for="endYear">End Year (Optional):</label>
+                  <input
+                    type="text"
+                    className="form-control text-center"
+                    id="endYear"
+                    value={this.state.endYear}
+                    onChange={this.handleChange}
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-default" id="runSearch">Search</button>
+                <button type="button" className="btn btn-default" id="clearAll">Clear Results</button>
+
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     );

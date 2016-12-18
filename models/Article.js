@@ -11,7 +11,8 @@ var ArticleSchema = new Schema({
     unique: true
   },
   date: {
-    type: Date
+    type: Date,
+    default: Date.now()
   },
   url: {
     type: String

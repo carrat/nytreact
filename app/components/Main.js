@@ -3,6 +3,7 @@ import React from "react";
 // Import sub-components
 import Form from "./children/Form";
 import Results from "./children/Results";
+import Saved from "./children/Saved";
 
 // Helper Function
 import helpers from "./utils/helpers";
@@ -15,7 +16,12 @@ class Main extends React.Component {
 
     this.state = {
       searchTerm: "",
-      results: ""
+      startYear: "",
+      endYear: "",
+      numRecords: "",
+      results: [{title:"", url:""}],
+      title: "",
+      url: ""
     };
 
     this.setTerm = this.setTerm.bind(this);
@@ -23,10 +29,13 @@ class Main extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
 
-    if (prevState.searchTerm !== this.state.searchTerm) {
-      console.log("UPDATED");
+    if (prevState.searchTerm !== this.state.searchTerm) ||
+       (prevState.startYear !== this.state.startYear) ||
+       (prevState.endYear !== this.state.endYear)) || 
+       (prevState.numRecords !== this.state.numRecords)) || {
+       console.log("UPDATED");
 
-      helpers.runQuery(this.state.searchTerm).then((data) => {
+      helpers.searchArticles(this.state.searchTerm), this.state.startYear, this.state.endYear, this.state.numRecords).then((data) => {
         if (data !== this.state.results) {
           console.log(data);
 
@@ -36,39 +45,30 @@ class Main extends React.Component {
     }
   }
 
-  setTerm(term) {
+  setTerm(data) {
     this.setState({
-      searchTerm: term
+      searchTerm: data.searchTerm,
+      startYear:  data.startYear,
+      endYear: data.endYear,
+      numRecords: data.numRecords
     });
   }
+
+
 
   render() {
 
     return (
 
       <div className="container">
-        <div className="row">
           <div className="jumbotron">
-            <h2 className="text-center">Address Finder!</h2>
-            <p className="text-center">
-              <em>Enter a landmark to search for its exact address (ex: "Eiffel Tower").</em>
-            </p>
+            <h1 className="text-center">New York Times Search Engine</h1>
           </div>
 
-          <div className="col-md-6">
-
-            <Form setTerm={this.setTerm} />
-
-          </div>
-
-          <div className="col-md-6">
-
-            <Results address={this.state.results} />
-
-          </div>
-
-        </div>
-
+          <Form setTerm={this.setTerm} />
+          <Results articles={this.state.results} />
+          <Saved articles={this.state.saved} />
+          
       </div>
     );
   }
