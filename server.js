@@ -39,7 +39,7 @@ app.use('/', routes);
 mongoose.connect("mongodb://localhost/nytsearch");
 
 // Heroku Mongo DB Connection
-/*var databaseUri = "mongodb://heroku_6cqm81s4:bud1rrg6idluvk280v727g4epc@ds127998.mlab.com:27998/heroku_6cqm81s4";
+/*var databaseUri = "mongodb://heroku_c1ztbc21:kju9ss6h80c9p3omkt3p9s22e6@ds139278.mlab.com:39278/heroku_c1ztbc21";
 
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI);
@@ -47,8 +47,8 @@ if (process.env.MONGODB_URI) {
 } else {
   mongoose.connect(databaseUri);
 }
-
-var db = mongoose.connection;*/
+*/
+var db = mongoose.connection;
 
 // Show any mongoose errors
 db.on("error", function(error) {
